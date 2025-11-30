@@ -1,0 +1,129 @@
+/* ===========================
+    CONTENEDOR PRINCIPAL
+=========================== */
+.productos-container {
+    padding: 40px 20px;
+  background: #fff1f7; /* rosado pastel suave */
+    min-height: 100vh;
+}
+
+/* Título */
+.productos-container h1 {
+    text-align: center;
+    font-size: 2.8rem;
+    color: #ff6fa9;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(255, 110, 150, 0.25);
+}
+
+/* ===========================
+    GRID DE PRODUCTOS
+=========================== */
+.lista-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 10px 20px;
+}
+
+/* ===========================
+    TARJETA EXACTA (producto)
+=========================== */
+.producto {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 20px;
+    border: 2px solid #ffd6e8;
+    box-shadow: 0 5px 12px rgba(255, 140, 170, 0.18);
+    transition: all 0.25s ease;
+    text-align: center;
+}
+
+/* Hover bonito */
+.producto:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(255, 120, 160, 0.28);
+}
+
+/* Imagen */
+.producto img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+/* Nombre */
+.producto h3 {
+    font-size: 1.4rem;
+    color: #ff5f96;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* Precio */
+.precio {
+    font-size: 1.25rem;
+    color: #444;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+/* ===========================
+    BOTONES / ACCIONES
+=========================== */
+.acciones-producto {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* Botón: Añadir */
+.acciones-producto button {
+    background: #ff8fbc;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 22px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(255, 140, 170, 0.3);
+}
+
+.acciones-producto button:hover {
+    background: #ff73ac;
+    transform: scale(1.06);
+}
+
+.acciones-producto button:active {
+    transform: scale(0.95);
+}
+
+/* Link "Ver detalle" */
+.acciones-producto .detalle {
+    background: #ffe0ed;
+    color: #ff4d92;
+    padding: 10px 16px;
+    border-radius: 22px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    border: 2px solid #ffbcd4;
+}
+
+.acciones-producto .detalle:hover {
+    background: #ffbcd4;
+    color: white;
+    transform: scale(1.06);
+}
+
+.acciones-producto .detalle:active {
+    transform: scale(0.95);
+}

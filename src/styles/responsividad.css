@@ -1,0 +1,115 @@
+/* =======================
+    FOOTER GENERAL
+   ======================= */
+.footer-container {
+    background-color: #fff0f5; /* Fondo rosado pastel */
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 3px solid #f8c6d6;
+    margin-top: 50px;
+    font-family: 'Lato', sans-serif; /* Texto general legible */
+}
+
+/* =======================
+    LINKS DEL FOOTER
+   ======================= */
+.footer-links {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-family: 'Playfair Display', serif; /* ELEGANTE COMO EL LOGO */
+    letter-spacing: 0.5px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #d81b60; /* rosado intenso */
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+    color: #ad1457; /* tono más oscuro */
+}
+
+/* =======================
+    ICONOS REDES SOCIALES
+   ======================= */
+.social-icons {
+    margin: 20px 0;
+}
+
+.social-icons a {
+    margin: 0 10px;
+    font-size: 1.7rem;
+    color: #d81b60;
+    transition: transform 0.3s ease-in-out, color 0.3s;
+}
+
+.social-icons a:hover {
+    transform: scale(1.2);
+    color: #ad1457;
+}
+
+/* =======================
+    NEWSLETTER
+   ======================= */
+.newsletter {
+    margin-top: 30px;
+}
+
+.newsletter p {
+    font-family: 'Playfair Display', serif; /* más elegante */
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.newsletter-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* INPUT DEL CORREO */
+.newsletter-box input {
+    padding: 10px 15px;
+    border: 2px solid #f8c6d6;
+    border-radius: 25px;
+    width: 250px;
+    outline: none;
+    font-size: 1rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.newsletter-box input:focus {
+    border-color: #d81b60;
+}
+
+/* BOTÓN SUSCRIBIRSE */
+.btn-newsletter {
+    background-color: #f48fb1; /* Rosado suave */
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+}
+
+.btn-newsletter:hover {
+    background-color: #ec7294;
+    transform: scale(1.05);
+}
+
+/* =======================
+    COPYRIGHT
+   ======================= */
+.footer-copy {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: #555;
+    font-family: 'Lato', sans-serif;
+}

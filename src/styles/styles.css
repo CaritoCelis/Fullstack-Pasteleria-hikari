@@ -1,0 +1,27 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff0f5; /* Rosa muy sutil */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* Responsive general */
+@media (max-width: 768px) {
+    .grid-home-productos {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .home-producto img {
+        height: 150px;
+    }
+}

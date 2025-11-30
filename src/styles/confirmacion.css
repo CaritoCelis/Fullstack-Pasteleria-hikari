@@ -1,0 +1,53 @@
+.confirmacion-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    font-family: "Poppins", Arial, sans-serif;
+}
+
+h2, h3 {
+    color: #d63384;
+}
+
+.producto-item {
+    background: #f8f9fa;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.boton-boleta {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.boton-boleta:hover {
+    background-color: #218838;
+}
+
+.estado {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.estado.procesando {
+    background-color: orange;
+}
+
+.estado.enviado {
+    background-color: #007bff;
+}
+
+.estado.entregado {
+    background-color: #28a745;
+}
