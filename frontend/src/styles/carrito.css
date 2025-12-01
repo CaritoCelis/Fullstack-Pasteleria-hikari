@@ -1,5 +1,5 @@
 /* ============================
-   CONTENEDOR GENERAL
+  CONTENEDOR GENERAL
    ============================ */
 .carrito-container {
   max-width: 900px;
@@ -20,7 +20,7 @@
 
 
 /* ============================
-   CARRITO VACÍO
+  CARRITO VACÍO
    ============================ */
 .vacio {
   text-align: center;
@@ -47,7 +47,7 @@
 
 
 /* ============================
-   TABLA DEL CARRITO
+  TABLA DEL CARRITO
    ============================ */
 .tabla-carrito {
   width: 100%;
@@ -82,7 +82,7 @@
 
 
 /* ============================
-   PRODUCTO SIN IMAGEN
+  PRODUCTO SIN IMAGEN
    ============================ */
 .producto-info {
   display: flex;
@@ -97,7 +97,7 @@
 
 
 /* ============================
-   CONTROLES DE CANTIDAD
+  CONTROLES DE CANTIDAD
    ============================ */
 .cantidad-controls {
   display: flex;
@@ -135,7 +135,7 @@
 
 
 /* ============================
-   BOTÓN ELIMINAR ITEM
+  BOTÓN ELIMINAR ITEM
    ============================ */
 .eliminar-btn {
   background: transparent;
@@ -153,7 +153,7 @@
 
 
 /* ============================
-   TOTAL DEL CARRITO
+  TOTAL DEL CARRITO
    ============================ */
 .total-carrito {
   text-align: right;
@@ -168,7 +168,7 @@
 
 
 /* ============================
-   BOTONES FINALES
+  BOTONES FINALES
    ============================ */
 .acciones-carrito {
   display: flex;
