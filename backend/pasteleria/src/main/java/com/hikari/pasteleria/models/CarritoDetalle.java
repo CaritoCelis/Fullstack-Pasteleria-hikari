@@ -1,32 +1,24 @@
-package com.hikari_pasteleria.models;
+package com.hikari.pasteleria.models;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "carrito_detalle")
 public class CarritoDetalle {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "carrito_id")
-    private Carrito carrito;
-
-    @ManyToOne
-    @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    private int cantidad;
+    private Integer cantidad;
 
     public CarritoDetalle() {}
-
-    public CarritoDetalle(Carrito carrito, Producto producto, int cantidad) {
-        this.carrito = carrito;
-        this.producto = producto;
-        this.cantidad = cantidad;
-    }
-
-    // Getters y setters
+    // getters & setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public Producto getProducto() { return producto; }
+    public void setProducto(Producto producto) { this.producto = producto; }
+    public Integer getCantidad() { return cantidad; }
+    public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
 }

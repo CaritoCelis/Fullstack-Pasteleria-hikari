@@ -1,29 +1,14 @@
 package com.hikari.pasteleria.service;
 
-import com.hikari.pasteleria.model.Usuario;
+import com.hikari.pasteleria.models.Usuario;
 import com.hikari.pasteleria.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
-
-    private final UsuarioRepository usuarioRepository;
-
-    public UsuarioService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
-
-    public Usuario registrar(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
-
-    public List<Usuario> listar() {
-        return usuarioRepository.findAll();
-    }
-
-    public Usuario buscarPorEmail(String email) {
-        return usuarioRepository.findByEmail(email);
-    }
+    private final UsuarioRepository repo;
+    public UsuarioService(UsuarioRepository repo){ this.repo = repo; }
+    public Optional<Usuario> findByUsername(String username){ return repo.findByUsername(username); }
+    public Usuario save(Usuario u){ return repo.save(u); }
 }

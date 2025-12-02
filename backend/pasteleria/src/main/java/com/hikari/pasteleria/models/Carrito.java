@@ -1,31 +1,26 @@
-package com.hikari_pasteleria.models;
+package com.hikari.pasteleria.models;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "carrito")
+@Table(name = "carritos")
 public class Carrito {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
-
-    private LocalDateTime fechaCreacion = LocalDateTime.now();
-
-    @OneToMany(mappedBy = "carrito", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CarritoDetalle> detalles;
 
+    @OneToOne
+    private Usuario usuario;
+
     public Carrito() {}
-
-    public Carrito(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    // Getters y setters
+    // getters & setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public List<CarritoDetalle> getDetalles() { return detalles; }
+    public void setDetalles(List<CarritoDetalle> detalles) { this.detalles = detalles; }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 }
