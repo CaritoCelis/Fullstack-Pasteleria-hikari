@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PasteleriaApplication<pasteleria>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.hikari.pasteleria.PasteleriaApplication",
+            "projectName": "pasteleria",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
