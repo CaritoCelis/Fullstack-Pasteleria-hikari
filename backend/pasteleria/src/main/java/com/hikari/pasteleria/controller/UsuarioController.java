@@ -1,6 +1,6 @@
 package com.hikari.pasteleria.controller;
 
-import com.hikari.pasteleria.model.Usuario;
+import com.hikari.pasteleria.models.Usuario;
 import com.hikari.pasteleria.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
