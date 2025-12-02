@@ -1,0 +1,138 @@
+/* 🩷 GENERAL HEADER */
+.header {
+    background-color: #ffe6f2;
+    border-bottom: 3px solid #ffb3d9;
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(255, 163, 202, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Container */
+.header-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 🧁 Logo + Título */
+.logo-titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.titulo-logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d64a8b;
+    text-shadow: 1px 1px #ffffff;
+}
+
+/* 🍰 BOTÓN MENÚ (MÓVIL) */
+#menu-toggle {
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #d64a8b;
+    display: none;
+}
+
+/* 📋 MENÚ NAVEGACIÓN */
+.menu-navegacion ul {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.menu-navegacion ul li {
+    list-style: none;
+}
+
+.menu-navegacion ul a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 17px;
+    color: #c4377c;
+    transition: 0.2s ease;
+}
+
+.menu-navegacion ul a:hover {
+    color: #ff5f9e;
+}
+
+/* 🎀 ESTILO DEL MENSAJE DE BIENVENIDA */
+.bienvenida {
+    font-weight: bold;
+    color: #d94b87;
+    background-color: #ffd9ec;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+/* ❌ BOTÓN DE CERRAR SESIÓN */
+.btn-logout {
+    padding: 6px 14px;
+    background-color: #ff6b9e;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-logout:hover {
+    background-color: #d94b87;
+}
+
+/* 🛒 Carrito */
+.menu-navegacion ul li a[href="/carrito"] {
+    font-size: 18px;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 900px) {
+    #menu-toggle {
+        display: block;
+    }
+
+    .menu-navegacion {
+        position: absolute;
+        top: 75px;
+        right: 0;
+        background-color: #ffe6f2;
+        width: 65%;
+        height: 100vh;
+        transform: translateX(100%);
+        transition: 0.3s ease;
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+        padding-top: 20px;
+    }
+
+    .menu-navegacion.active {
+        transform: translateX(0);
+    }
+
+    .menu-navegacion ul {
+        flex-direction: column;
+        gap: 18px;
+        padding-left: 20px;
+    }
+
+    .bienvenida {
+        align-self: flex-start;
+    }
+
+    .btn-logout {
+        width: 70%;
+        text-align: center;
+    }
+}

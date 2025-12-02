@@ -1,0 +1,140 @@
+/* ============================
+  CONTENEDOR DEL FORMULARIO
+   ============================ */
+.form-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff6fa;
+  border-radius: 22px;
+  box-shadow: 0 4px 12px rgba(255, 150, 170, 0.25);
+  font-family: "Poppins", sans-serif;
+}
+
+.form-container h3 {
+  color: #d06992;
+  font-weight: 700;
+  margin-top: 25px;
+  margin-bottom: 18px;
+  font-size: 20px;
+}
+
+.form-container h3:first-child {
+  margin-top: 0;
+}
+
+
+/* ============================
+  INPUTS DEL FORMULARIO
+   ============================ */
+.form-container input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 15px;
+  border: 2px solid #fbe1eb;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  color: #7f4963;
+  background: white;
+  transition: 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-container input::placeholder {
+  color: #c799ad;
+}
+
+.form-container input:focus {
+  outline: none;
+  border-color: #e8b3c9;
+  box-shadow: 0 0 0 3px rgba(232, 179, 201, 0.15);
+}
+
+
+/* ============================
+  INFORMACIÓN DE RETIRO
+   ============================ */
+.form-container p {
+  background: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: #7f4963;
+  font-size: 15px;
+  margin-bottom: 12px;
+  border-left: 4px solid #f3bdd1;
+}
+
+.form-container p strong {
+  color: #a1496e;
+  font-weight: 600;
+}
+
+
+/* ============================
+  TOTAL A PAGAR
+   ============================ */
+.form-container h3:last-of-type {
+  background: #fbe1eb;
+  padding: 16px 20px;
+  border-radius: 14px;
+  text-align: center;
+  color: #a83863;
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 25px;
+}
+
+
+/* ============================
+  BOTÓN CONFIRMAR
+   ============================ */
+.form-container button {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  background: #d57ea4;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 3px 8px rgba(213, 126, 164, 0.3);
+}
+
+.form-container button:hover {
+  background: #c16990;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(213, 126, 164, 0.4);
+}
+
+.form-container button:active {
+  transform: translateY(0);
+}
+
+
+/* ============================
+  RESPONSIVE
+   ============================ */
+@media (max-width: 768px) {
+  .form-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .form-container h3 {
+    font-size: 18px;
+  }
+
+  .form-container input {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .form-container button {
+    padding: 13px 18px;
+    font-size: 15px;
+  }
+}

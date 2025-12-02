@@ -1,0 +1,184 @@
+/* ================================
+   CONTENEDOR GENERAL
+================================ */
+.detalle-producto-container {
+  padding: 40px 20px;
+  background: #fff1f7; /* rosado pastel */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+/* Contenedor principal del detalle */
+.detalle-producto {
+  display: flex;
+  gap: 40px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 25px;
+  border: 2px solid #ffd6e8;
+  box-shadow: 0 5px 15px rgba(255, 120, 160, 0.22);
+  max-width: 900px;
+  width: 100%;
+  animation: fadeUp 0.5s ease;
+}
+
+/* animación suave */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================
+   IMAGEN DEL PRODUCTO
+================================ */
+.imagen-producto img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 2px solid #ffd0e5;
+  box-shadow: 0 4px 12px rgba(255, 120, 160, 0.23);
+}
+
+/* ================================
+   INFORMACIÓN DEL PRODUCTO
+================================ */
+.info-producto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-producto h2 {
+  font-size: 2rem;
+  color: #ff5f96;
+  margin-bottom: 15px;
+  text-shadow: 0 1px 3px rgba(255, 150, 180, 0.25);
+}
+
+.descripcion {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* precio */
+.info-producto .precio {
+  font-size: 1.6rem;
+  color: #ff3f85;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* ================================
+   CONTADOR DE CANTIDAD
+================================ */
+.cantidad-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.cantidad-container button {
+  background: #ff8fbc;
+  color: white;
+  border: none;
+  padding: 8px 20px;     /* Botón ovalado */
+  font-size: 1.2rem;
+  border-radius: 15px;   /* Forma no redonda */
+  cursor: pointer;
+  transition: 0.25s;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(255, 120, 160, 0.3);
+}
+
+.cantidad-container button:hover {
+  background: #ff73ac;
+  transform: scale(1.08);
+}
+
+.cantidad-container button:active {
+  transform: scale(0.92);
+}
+
+.cantidad-container span {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ff4d8f;
+}
+
+/* ================================
+   BOTÓN AÑADIR AL CARRITO
+================================ */
+.btn-carrito {
+  background: #ff78b0;
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 22px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  transition: 0.25s;
+  box-shadow: 0 4px 12px rgba(255, 120, 160, 0.3);
+}
+
+.btn-carrito:hover {
+  background: #ff5a9c;
+  transform: scale(1.06);
+}
+
+.btn-carrito:active {
+  transform: scale(0.95);
+}
+
+/* ================================
+   BOTÓN VOLVER (actualizado)
+================================ */
+.volver {
+  display: inline-block;
+  background: #ffe0ed;
+  color: #ff4d92;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: 0.25s;
+  border: 2px solid #ffbcd4;
+  box-shadow: 0 4px 10px rgba(255, 120, 160, 0.25);
+  width: fit-content;
+}
+
+.volver:hover {
+  background: #ffbcd4;
+  color: white;
+  transform: scale(1.05);
+}
+
+.volver:active {
+  transform: scale(0.95);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .detalle-producto {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .imagen-producto img {
+    width: 100%;
+    height: auto;
+  }
+
+  .info-producto {
+    width: 100%;
+    text-align: center;
+  }
+}

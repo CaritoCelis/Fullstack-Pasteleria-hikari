@@ -1,0 +1,108 @@
+/* CONTENEDOR GENERAL */
+.detalle-blog {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff8fb; /* Rosa pastel muy suave */
+    border-radius: 12px;
+    border: 2px solid #f7cadd;
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.25);
+    font-family: 'Lato', sans-serif;
+    color: #4a2d3e; /* Tono chocolate suave */
+}
+
+/* TÍTULO PRINCIPAL */
+.titulo-blog {
+    font-size: 32px;
+    font-weight: 700;
+    color: #b7266b; /* Rosa más intenso */
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.3;
+}
+
+/* GALERÍA DE IMÁGENES */
+.imagenes-blog {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.img-blog {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 10px;
+    border: 3px solid #ffcee1;
+    object-fit: cover;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.img-blog:hover {
+    transform: scale(1.04);
+    box-shadow: 0 5px 12px rgba(255, 150, 190, 0.4);
+}
+
+/* CUERPO DEL CONTENIDO */
+.contenido-blog p {
+    margin-bottom: 15px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.contenido-blog ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.contenido-blog li {
+    margin-bottom: 8px;
+    font-size: 17px;
+}
+
+.contenido-blog h3 {
+    color: #b7266b;
+    border-left: 4px solid #f7a4c4;
+    padding-left: 8px;
+    margin: 25px 0 10px;
+    font-size: 22px;
+}
+
+/* BOTÓN VOLVER */
+.btn-volver-blog {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 12px 25px;
+    background-color: #ffd4e7;
+    border: 2px solid #f5a8c6;
+    color: #663147;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.25s ease;
+}
+
+.btn-volver-blog:hover {
+    background-color: #f5a8c6;
+    color: #fff;
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0px 4px 14px rgba(255, 171, 194, 0.55);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .titulo-blog {
+        font-size: 26px;
+    }
+
+    .img-blog {
+        max-width: 100%;
+    }
+
+    .contenido-blog p,
+    .contenido-blog li {
+        font-size: 16px;
+    }
+}
