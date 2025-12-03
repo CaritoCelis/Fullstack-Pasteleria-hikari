@@ -1,0 +1,130 @@
+/* ---------- ENCABEZADO DEL BLOG ---------- */
+.blog-header {
+    text-align: center;
+    background: #ffe7f1;
+    padding: 60px 20px;
+    border-bottom: 4px solid #ffc4dd;
+    box-shadow: 0 6px 20px rgba(255, 150, 180, 0.2);
+}
+
+.blog-header h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    color: #d43f86;
+    font-weight: 800;
+}
+
+.blog-header .resaltado {
+    color: #ff1e8d;
+}
+
+.blog-header p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* ---------- ARTÍCULO ---------- */
+.bloque-noticia {
+    display: flex;
+    gap: 25px;
+    margin: 40px auto;
+    max-width: 1100px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 22px;
+    border: 3px solid #ffd2e3;
+    box-shadow: 0 5px 18px rgba(255, 150, 180, 0.25);
+    transition: 0.25s;
+}
+
+.bloque-noticia:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(255, 150, 180, 0.33);
+}
+
+/* ---------- GALERÍA DE IMÁGENES ---------- */
+.imagenes-noticia {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.imagen-noticia {
+    width: 260px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid #ffbcd8;
+    box-shadow: 0 3px 12px rgba(255, 150, 180, 0.25);
+    transition: 0.25s;
+}
+
+.imagen-noticia:hover {
+    transform: scale(1.05);
+}
+
+/* ---------- CONTENIDO DE LA NOTICIA ---------- */
+.contenido {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenido h2 {
+    font-size: 28px;
+    color: #d43f86;
+    margin-bottom: 12px;
+}
+
+.contenido p {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* ---------- BOTÓN "VER MÁS" ---------- */
+.btn-ver-mas {
+    align-self: flex-start;
+    background-color: #ffe0ef;
+    color: #d43f86;
+    padding: 10px 18px;
+    border-radius: 14px;
+    border: 2px solid #ffb9d9;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(255, 140, 170, 0.25);
+}
+
+.btn-ver-mas:hover {
+    background-color: #ffc6dd;
+    transform: translateY(-3px);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+    .bloque-noticia {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .imagenes-noticia {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .imagen-noticia {
+        width: 45%;
+        height: 160px;
+    }
+}
+
+@media (max-width: 600px) {
+    .imagen-noticia {
+        width: 100%;
+    }
+}

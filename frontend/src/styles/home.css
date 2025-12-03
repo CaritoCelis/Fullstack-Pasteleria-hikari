@@ -1,0 +1,134 @@
+/* Banner ajustado: ancho grande, altura menor y transparencia */
+.banner img {
+    width: 95%;                 /* Casi todo el ancho, deja margen lateral */
+    max-height: 250px;          /* Más corto que antes */
+    height: auto;               /* Mantiene proporción */
+    margin: 20px auto 30px auto;/* Centrado y separacion superior e inferior */
+    border-radius: 15px;        /* Bordes suaves */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Sombra elegante */
+    opacity: 0.9;               /* Transparencia sutil */
+    display: block;             /* Centrado correcto */
+    object-fit: cover;          /* Mantiene proporción y recorta si es necesario */
+}
+
+
+
+
+/* Título de productos */
+.productos-titulo {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #ffb6c1; /* Rosado claro */
+}
+
+.productos-titulo h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.productos-titulo h3 {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* Grid productos */
+.grid-home-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 0 20px;
+}
+
+/* Card de producto */
+.home-producto {
+    background-color: #fff0f5; /* Rosa muy suave */
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-producto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.home-producto img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.home-producto h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #d1477b; /* Rosado medio */
+}
+
+.precio {
+    font-weight: bold;
+    color: #ff69b4; /* Rosado brillante */
+    margin-bottom: 10px;
+}
+
+/* Botones de acción */
+.acciones-producto {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.acciones-producto button,
+.acciones-producto .detalle {
+    background-color: #ffc0cb; /* Rosa claro */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.2s ease;
+}
+
+.acciones-producto button:hover,
+.acciones-producto .detalle:hover {
+    background-color: #ff69b4; /* Rosa más vivo */
+}
+
+/* Botón Ver Más */
+.ver-mas {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.btn-ver-mas {
+    background-color: #ffb6c1;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.btn-ver-mas:hover {
+    background-color: #ff69b4;
+}
+
+/* Responsive general */
+@media (max-width: 768px) {
+    .grid-home-productos {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .home-producto img {
+        height: 150px;
+    }
+}

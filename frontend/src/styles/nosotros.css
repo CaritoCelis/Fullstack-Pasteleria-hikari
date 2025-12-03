@@ -1,0 +1,317 @@
+/* =====================================
+    SECCIÓN ANIVERSARIO
+===================================== */
+.bloque-aniversario {
+    background-color: #fffafc;
+    border-left: 6px solid #ff7aa8;
+    border-right: 6px solid #ff7aa8;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    padding: 50px 20px;
+    max-width: 950px;
+    margin: 40px auto;
+}
+
+.bloque-aniversario .banner-contenido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.bloque-aniversario .banner-texto {
+    flex: 2;
+}
+
+.bloque-aniversario .banner-texto h2 {
+    text-align: center;
+    color: #ff7aa8;
+    font-size: 38px;
+    margin-bottom: 10px;
+    font-family: 'Lato', cursive;
+}
+
+.bloque-aniversario .banner-texto p {
+    text-align: right;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #6b5b5b;
+    margin: 0 0 20px 0;
+    max-width: 800px;
+    font-weight: 500;
+}
+
+/* =====================================
+    HEADER "CONÓCENOS"
+===================================== */
+.conocenos-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 40px auto 20px;
+    max-width: 950px;
+}
+
+.conocenos-header .logo-placeholder {
+    background: #ff7aa8;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 18px 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-family: 'Pacifico', cursive;
+}
+
+.conocenos-header h1 {
+    font-size: 28px;
+    margin: 0;
+    color: #3b2f2f;
+    font-family: 'Pacifico', cursive;
+}
+
+.conocenos-header .badge {
+    background: #fff0f5;
+    color: #ff7aa8;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-top: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* =====================================
+    PÁRRAFO DESTACADO
+===================================== */
+.conocenos .lead {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    padding: 20px 25px;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #4a3f3f;
+    background: #fffafc;
+    border-left: 6px solid #ff7aa8;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    text-align: justify;
+}
+
+/* =====================================
+    CARDS DE INFORMACIÓN
+===================================== */
+.card.bloque {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    margin: 30px auto;
+    max-width: 950px;
+    text-align: center;
+}
+
+.card.bloque img {
+    width: 300px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card.bloque h2 {
+    color: #ff7aa8;
+    margin: 15px 0 10px;
+    font-size: 24px;
+}
+
+.card.bloque p {
+    font-size: 15px;
+    color: #6b5b5b;
+    line-height: 1.6;
+}
+
+/* =====================================
+    VALORES DE EMPRESA
+===================================== */
+.valores {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.valor {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+}
+
+.valor .icon {
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.valor .texto h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #3b2f2f;
+}
+
+.valor .texto p {
+    margin: 2px 0 0;
+    font-size: 14px;
+    color: #6b5b5b;
+}
+
+/* =====================================
+    COMENTARIOS / TESTIMONIOS
+===================================== */
+.comentarios {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+}
+
+.comentarios h2 {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+.comentarios-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.comentarios-container {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1000px;
+    scroll-behavior: smooth;
+}
+
+.comentario {
+    min-width: 300px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.comentario:hover {
+    transform: scale(1.03);
+}
+
+.cliente-foto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.comentario-texto p {
+    font-size: 0.95em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.comentario-texto h4 {
+    margin: 0;
+    font-weight: bold;
+    color: #555;
+}
+
+.comentarios-slider button {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #e91e63;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.comentarios-slider button:hover {
+    color: #ff69b4;
+}
+
+/* =====================================
+    RESPONSIVE
+===================================== */
+@media (max-width: 768px) {
+    .bloque-aniversario {
+        padding: 40px 15px;
+        margin: 30px 10px;
+    }
+
+    .bloque-aniversario .banner-contenido,
+    .conocenos-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .bloque-aniversario .banner-texto h2 {
+        font-size: 32px;
+    }
+
+    .bloque-aniversario .banner-texto p {
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .card.bloque img {
+        width: 200px;
+    }
+
+    .conocenos-header h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bloque-aniversario {
+        padding: 30px 12px;
+        margin: 20px 8px;
+        border-left: 4px solid #ff7aa8;
+        border-right: 4px solid #ff7aa8;
+    }
+
+    .bloque-aniversario .banner-texto h2 {
+        font-size: 28px;
+    }
+
+    .card.bloque img {
+        width: 150px;
+    }
+
+    .conocenos-header h1 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 360px) {
+    .bloque-aniversario .banner-texto h2 {
+        font-size: 24px;
+    }
+
+    .comentario {
+        min-width: 220px;
+        padding: 12px;
+    }
+
+    .cliente-foto {
+        width: 70px;
+        height: 70px;
+    }
+}

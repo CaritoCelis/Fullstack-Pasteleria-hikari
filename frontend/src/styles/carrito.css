@@ -1,0 +1,214 @@
+/* ============================
+  CONTENEDOR GENERAL
+   ============================ */
+.carrito-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff6fa;
+  border-radius: 22px;
+  box-shadow: 0 4px 12px rgba(255, 150, 170, 0.25);
+  font-family: "Poppins", sans-serif;
+}
+
+.carrito-container h1 {
+  text-align: center;
+  font-weight: 700;
+  color: #d06992;
+  margin-bottom: 25px;
+}
+
+
+/* ============================
+  CARRITO VACÍO
+   ============================ */
+.vacio {
+  text-align: center;
+  padding: 40px 0;
+  color: #b55f82;
+  font-size: 18px;
+}
+
+.seguir-comprando {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 22px;
+  background: #e8b3c9;
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: 0.3s ease;
+  font-weight: 600;
+}
+
+.seguir-comprando:hover {
+  background: #d799b4;
+}
+
+
+/* ============================
+  TABLA DEL CARRITO
+   ============================ */
+.tabla-carrito {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(255, 170, 190, 0.2);
+}
+
+.tabla-carrito thead {
+  background: #fbe1eb;
+}
+
+.tabla-carrito thead th {
+  padding: 14px;
+  color: #a1496e;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.tabla-carrito tbody tr {
+  border-bottom: 1px solid #ffe3ef;
+}
+
+.tabla-carrito td {
+  padding: 15px 10px;
+  text-align: center;
+  color: #7f4963;
+  font-size: 15px;
+}
+
+
+/* ============================
+  PRODUCTO SIN IMAGEN
+   ============================ */
+.producto-info {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  color: #a1496e;
+}
+
+.producto-info img {
+  display: none !important;
+}
+
+
+/* ============================
+  CONTROLES DE CANTIDAD
+   ============================ */
+.cantidad-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cantidad-controls button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #f3bdd1;
+  color: white;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cantidad-controls button:hover {
+  background: #e2a5bf;
+}
+
+.cantidad-controls button:disabled {
+  background: #fde6ef;
+  color: #b395a4;
+  cursor: not-allowed;
+}
+
+.cantidad-controls span {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+
+/* ============================
+  BOTÓN ELIMINAR ITEM
+   ============================ */
+.eliminar-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #cf5d8c;
+  transition: 0.2s;
+}
+
+.eliminar-btn:hover {
+  color: #b34b77;
+  transform: scale(1.15);
+}
+
+
+/* ============================
+  TOTAL DEL CARRITO
+   ============================ */
+.total-carrito {
+  text-align: right;
+  margin-top: 25px;
+}
+
+.total-carrito h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #a83863;
+}
+
+
+/* ============================
+  BOTONES FINALES
+   ============================ */
+.acciones-carrito {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.acciones-carrito button {
+  padding: 12px 20px;
+  font-size: 15px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-vaciar {
+  background: #ffd2de;
+  color: #a03f61;
+}
+
+.btn-vaciar:hover {
+  background: #f0a8b9;
+}
+
+.btn-login {
+  background: #e2a9c4;
+  color: white;
+}
+
+.btn-login:hover {
+  background: #ce8eab;
+}
+
+.btn-pagar {
+  background: #d57ea4;
+  color: white;
+}
+
+.btn-pagar:hover {
+  background: #c16990;
+}
