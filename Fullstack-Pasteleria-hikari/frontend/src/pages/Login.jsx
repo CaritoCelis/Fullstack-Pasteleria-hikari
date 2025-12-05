@@ -18,35 +18,58 @@ function Login() {
     setError("");
 
     try {
+      // 1️⃣ Primer paso: Login y obtener token
       const response = await api.post("/auth/login", {
         username: email,
         password: password
       });
 
       const data = response.data;
+      console.log("✅ Login exitoso:", data);
 
-      // ✅ CORREGIDO: Guardar TODOS los datos que devuelve el backend
+      // 2️⃣ Segundo paso: Obtener roles del usuario usando el token
+      const meResponse = await api.get("/auth/me", {
+        headers: { 
+          Authorization: `Bearer ${data.token}` 
+        }
+      });
+
+      console.log("✅ Datos completos con roles:", meResponse.data);
+
+      // 3️⃣ Construir objeto usuario completo CON roles
       const usuarioCompleto = {
-        username: data.username,
-        email: data.email,
-        nombre: data.nombre || "",
-        apellido: data.apellido || "",
-        fechaNacimiento: data.fechaNacimiento || "",
+        id: meResponse.data.id,
+        username: meResponse.data.username,
+        email: meResponse.data.email,
+        nombre: meResponse.data.nombre || "",
+        apellido: meResponse.data.apellido || "",
+        fechaNacimiento: meResponse.data.fechaNacimiento || "",
+        roles: meResponse.data.roles || [], // ✅ AHORA SÍ TIENE ROLES
         token: data.token
       };
 
-      // Guardar en localStorage
+      console.log("👤 Usuario completo guardado:", usuarioCompleto);
+      console.log("🔍 Roles del usuario:", usuarioCompleto.roles);
+
+      // 4️⃣ Guardar en localStorage y contexto
       localStorage.setItem("token", data.token);
       localStorage.setItem("usuario", JSON.stringify(usuarioCompleto));
-
-      // ✅ Actualizar contexto con TODOS los datos
       login(usuarioCompleto);
 
-      console.log("Login exitoso:", usuarioCompleto);
-      navigate("/");
+      // 5️⃣ Verificar si es admin y redirigir
+      const esAdmin = usuarioCompleto.roles.includes("ROLE_ADMIN");
+      console.log("🔐 ¿Es administrador?", esAdmin);
+
+      if (esAdmin) {
+        console.log("➡️ Redirigiendo al panel admin");
+        navigate("/admin");
+      } else {
+        console.log("➡️ Redirigiendo al inicio");
+        navigate("/");
+      }
 
     } catch (err) {
-      console.error(err);
+      console.error("❌ Error en login:", err);
       if (err.response?.status === 401 || err.response?.status === 404) {
         setError("Correo o contraseña incorrectos");
       } else {

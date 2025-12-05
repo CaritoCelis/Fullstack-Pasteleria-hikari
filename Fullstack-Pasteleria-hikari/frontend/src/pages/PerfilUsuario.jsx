@@ -1,5 +1,7 @@
+// src/pages/PerfilUsuario.jsx
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import api from "../api/api";
 import "../styles/perfilUsuario.css";
 
 export default function PerfilUsuario() {
@@ -33,15 +35,13 @@ export default function PerfilUsuario() {
           return;
         }
 
-        const response = await fetch("http://localhost:8080/api/auth/me", {
-          headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
-        });
-
-        if (response.ok) {
-          const data = await response.json();
+        // ✅ CORREGIDO: Usar api (axios) en vez de fetch
+        const response = await api.get("/usuarios/me");
+        
+        if (response.data) {
+          const data = response.data;
+          
+          console.log("✅ Datos del usuario cargados:", data);
           
           // Combinar datos del backend con datos locales (dirección, teléfono, etc.)
           const datosLocales = JSON.parse(localStorage.getItem("datosCheckout")) || {};
@@ -57,21 +57,49 @@ export default function PerfilUsuario() {
             region: datosLocales.region || "",
             tarjeta: datosLocales.tarjeta || "",
           });
-        } else {
-          console.error("Error al cargar datos del usuario");
         }
       } catch (error) {
-        console.error("Error al conectar con el servidor:", error);
+        console.error("❌ Error al cargar datos del usuario:", error);
+        
+        // Si falla, intentar cargar desde localStorage
+        const usuarioGuardado = localStorage.getItem("usuario");
+        if (usuarioGuardado) {
+          const data = JSON.parse(usuarioGuardado);
+          const datosLocales = JSON.parse(localStorage.getItem("datosCheckout")) || {};
+          
+          setUsuario({
+            nombre: data.nombre || "",
+            apellido: data.apellido || "",
+            email: data.email || "",
+            fechaNacimiento: data.fechaNacimiento || "",
+            telefono: datosLocales.telefono || "",
+            direccion: datosLocales.direccion || "",
+            comuna: datosLocales.comuna || "",
+            region: datosLocales.region || "",
+            tarjeta: datosLocales.tarjeta || "",
+          });
+        }
       } finally {
         setCargando(false);
       }
     };
 
-    // Cargar historial de pedidos
-    const pedidosGuardados = JSON.parse(localStorage.getItem("historialPedidos"));
-    if (pedidosGuardados) setPedidos(pedidosGuardados);
+    // ✅ Cargar historial de pedidos desde el backend
+    const cargarPedidos = async () => {
+      try {
+        const response = await api.get("/pedidos");
+        console.log("✅ Pedidos cargados:", response.data);
+        setPedidos(response.data);
+      } catch (error) {
+        console.error("❌ Error al cargar pedidos:", error);
+        // Fallback: cargar desde localStorage
+        const pedidosGuardados = JSON.parse(localStorage.getItem("historialPedidos")) || [];
+        setPedidos(pedidosGuardados);
+      }
+    };
 
     cargarDatosUsuario();
+    cargarPedidos();
   }, []);
 
   const handleChange = (e) => {
@@ -96,7 +124,10 @@ export default function PerfilUsuario() {
   if (cargando) {
     return (
       <div className="perfil-container">
-        <p>Cargando perfil...</p>
+        <div className="spinner-container">
+          <div className="spinner"></div>
+          <p>Cargando perfil...</p>
+        </div>
       </div>
     );
   }
@@ -111,10 +142,22 @@ export default function PerfilUsuario() {
 
         {modoEdicion ? (
           <>
-            <input name="nombre" value={usuario.nombre} onChange={handleChange} disabled />
-            <input name="apellido" value={usuario.apellido} onChange={handleChange} disabled />
-            <input name="email" value={usuario.email} onChange={handleChange} disabled />
-            <input name="telefono" value={usuario.telefono} onChange={handleChange} placeholder="Teléfono" />
+            <div className="campo-form">
+              <label>Nombre:</label>
+              <input name="nombre" value={usuario.nombre} onChange={handleChange} disabled />
+            </div>
+            <div className="campo-form">
+              <label>Apellido:</label>
+              <input name="apellido" value={usuario.apellido} onChange={handleChange} disabled />
+            </div>
+            <div className="campo-form">
+              <label>Email:</label>
+              <input name="email" value={usuario.email} onChange={handleChange} disabled />
+            </div>
+            <div className="campo-form">
+              <label>Teléfono:</label>
+              <input name="telefono" value={usuario.telefono} onChange={handleChange} placeholder="Ingresa tu teléfono" />
+            </div>
           </>
         ) : (
           <>
@@ -133,9 +176,18 @@ export default function PerfilUsuario() {
         <h3>🏠 Dirección de Envío</h3>
         {modoEdicion ? (
           <>
-            <input name="direccion" value={usuario.direccion} onChange={handleChange} placeholder="Dirección" />
-            <input name="comuna" value={usuario.comuna} onChange={handleChange} placeholder="Comuna" />
-            <input name="region" value={usuario.region} onChange={handleChange} placeholder="Región" />
+            <div className="campo-form">
+              <label>Dirección:</label>
+              <input name="direccion" value={usuario.direccion} onChange={handleChange} placeholder="Calle y número" />
+            </div>
+            <div className="campo-form">
+              <label>Comuna:</label>
+              <input name="comuna" value={usuario.comuna} onChange={handleChange} placeholder="Comuna" />
+            </div>
+            <div className="campo-form">
+              <label>Región:</label>
+              <input name="region" value={usuario.region} onChange={handleChange} placeholder="Región" />
+            </div>
           </>
         ) : (
           <p>
@@ -150,12 +202,15 @@ export default function PerfilUsuario() {
       <div className="perfil-card">
         <h3>💳 Tarjeta Registrada</h3>
         {modoEdicion ? (
-          <input
-            name="tarjeta"
-            value={usuario.tarjeta}
-            onChange={handleChange}
-            placeholder="**** **** **** 1234"
-          />
+          <div className="campo-form">
+            <label>Número de tarjeta:</label>
+            <input
+              name="tarjeta"
+              value={usuario.tarjeta}
+              onChange={handleChange}
+              placeholder="**** **** **** 1234"
+            />
+          </div>
         ) : (
           <p>{usuario.tarjeta ? usuario.tarjeta : "No hay tarjeta registrada."}</p>
         )}
@@ -164,7 +219,10 @@ export default function PerfilUsuario() {
       {/* Botones Editar / Guardar */}
       <div className="btn-contenedor">
         {modoEdicion ? (
-          <button onClick={guardarCambios} className="btn-guardar">💾 Guardar Cambios</button>
+          <>
+            <button onClick={guardarCambios} className="btn-guardar">💾 Guardar Cambios</button>
+            <button onClick={() => setModoEdicion(false)} className="btn-cancelar">❌ Cancelar</button>
+          </>
         ) : (
           <button onClick={() => setModoEdicion(true)} className="btn-editar">✏️ Editar Perfil</button>
         )}
@@ -179,17 +237,16 @@ export default function PerfilUsuario() {
           pedidos.map((pedido) => (
             <div key={pedido.id} className="pedido-box">
               <p><strong>Pedido N°:</strong> {pedido.id}</p>
-              <p><strong>Fecha:</strong> {pedido.fecha}</p>
-              <p><strong>Total:</strong> ${pedido.total.toLocaleString()} CLP</p>
-              <p><strong>Estado:</strong> {pedido.estado}</p>
-              <ul>
-                {pedido.productos?.map((prod, idx) => (
-                  <li key={idx}>{prod.nombre} x{prod.cantidad}</li>
-                ))}
-              </ul>
-              <button onClick={() => window.open(pedido.boleta, "_blank")} className="boton-boleta">
-                📄 Descargar Boleta
-              </button>
+              <p><strong>Fecha:</strong> {new Date(pedido.createdAt).toLocaleDateString('es-CL')}</p>
+              <p><strong>Total:</strong> ${pedido.total?.toLocaleString() || '0'} CLP</p>
+              <p><strong>Estado:</strong> {pedido.status || 'PENDIENTE'}</p>
+              {pedido.items && pedido.items.length > 0 && (
+                <ul>
+                  {pedido.items.map((item, idx) => (
+                    <li key={idx}>{item.producto?.name || 'Producto'} x{item.quantity}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))
         )}

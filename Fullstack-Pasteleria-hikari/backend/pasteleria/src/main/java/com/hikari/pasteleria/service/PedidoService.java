@@ -36,7 +36,7 @@ public class PedidoService {
     public Pedido createPedido(Usuario usuario, List<OrderItem> items){
         Pedido pedido = new Pedido();
         pedido.setUsuario(usuario);
-        pedido.setStatus("PENDING");
+        pedido.setStatus("PENDIENTE");
         List<OrderItem> savedItems = new ArrayList<>();
         BigDecimal total = BigDecimal.ZERO;
 

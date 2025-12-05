@@ -1,5 +1,6 @@
 package com.hikari.pasteleria.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,20 +12,19 @@ public class Pedido {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-@ManyToOne
-@JoinColumn(name = "usuario_id", nullable = false)
-private Usuario usuario;
-
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     private BigDecimal total;
     private String status;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<OrderItem> items;
 
     public Pedido() {}
-    // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public Usuario getUsuario() { return usuario; }

@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { CarritoContext } from "../context/CarritoContext";
 import { AuthContext } from "../context/AuthContext";
 import "../styles/responsividad.css";
-import "../styles/header.css"; // Asegúrate de tener estilos de burbuja
+import "../styles/header.css";
 
 const Header = () => {
   const [menuActivo, setMenuActivo] = useState(false);
   const { totalCantidad } = useContext(CarritoContext);
-  const { usuario, logout } = useContext(AuthContext);
+  const { usuario, logout, isAdmin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const toggleMenu = () => setMenuActivo(!menuActivo);
@@ -43,6 +43,15 @@ const Header = () => {
             <li><Link to="/productos" onClick={closeMenu}>Productos</Link></li>
             <li><Link to="/blog" onClick={closeMenu}>Blog</Link></li>
             <li><Link to="/contacto" onClick={closeMenu}>Contacto</Link></li>
+
+            {/* Enlace Admin - Solo si es administrador */}
+            {isAdmin() && (
+              <li>
+                <Link to="/admin" onClick={closeMenu} className="link-admin">
+                🔧 Admin
+                </Link>
+              </li>
+            )}
 
             <li className="carrito-header">
               <Link to="/carrito" onClick={closeMenu}>

@@ -1,53 +1,244 @@
+/* src/styles/confirmacion.css */
+
 .confirmacion-container {
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 25px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    font-family: "Poppins", Arial, sans-serif;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff6fa;
+  border-radius: 22px;
+  box-shadow: 0 4px 12px rgba(255, 150, 170, 0.25);
+  font-family: "Poppins", sans-serif;
 }
 
-h2, h3 {
-    color: #d63384;
+.loading-paypal {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.spinner {
+  border: 5px solid #fbe1eb;
+  border-top: 5px solid #d57ea4;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-paypal h2,
+.error-pedido h2,
+.confirmacion-exitosa h2 {
+  color: #d06992;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.confirmacion-exitosa {
+  text-align: center;
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pedido-numero {
+  font-size: 1.2rem;
+  color: #a83863;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.paypal-simulado {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 20px 0;
+  border: 2px solid #fbe1eb;
+}
+
+.badge-simulado {
+  display: inline-block;
+  background: #e8b3c9;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.info-simulado {
+  color: #b395a4;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.datos-cliente,
+.info-envio,
+.info-retiro {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  text-align: left;
+  border: 2px solid #fbe1eb;
+}
+
+.datos-cliente h3,
+.info-envio h3,
+.info-retiro h3,
+.productos-lista h3,
+.resumen-pago h3 {
+  color: #d06992;
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.datos-cliente p,
+.info-envio p,
+.info-retiro p {
+  color: #7f4963;
+  margin: 8px 0;
+}
+
+.productos-lista {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  border: 2px solid #fbe1eb;
 }
 
 .producto-item {
-    background: #f8f9fa;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #ffe3ef;
 }
 
-.boton-boleta {
-    margin-top: 20px;
-    padding: 12px 25px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
+.producto-item:last-child {
+  border-bottom: none;
 }
 
-.boton-boleta:hover {
-    background-color: #218838;
+.producto-item p {
+  color: #7f4963;
+  margin: 0;
 }
 
-.estado {
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: white;
+.precio-item {
+  font-weight: 600;
+  color: #a83863;
 }
 
-.estado.procesando {
-    background-color: orange;
+.resumen-pago {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  border: 2px solid #fbe1eb;
+  text-align: left;
 }
 
-.estado.enviado {
-    background-color: #007bff;
+.resumen-pago p {
+  color: #7f4963;
+  margin: 10px 0;
+  font-size: 1.05rem;
 }
 
-.estado.entregado {
-    background-color: #28a745;
+.total-final {
+  color: #a83863;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid #fbe1eb;
+}
+
+.acciones-finales {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.btn-inicio,
+.btn-perfil {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-inicio {
+  background: #e8b3c9;
+  color: white;
+}
+
+.btn-inicio:hover {
+  background: #d799b4;
+  transform: translateY(-2px);
+}
+
+.btn-perfil {
+  background: #d57ea4;
+  color: white;
+}
+
+.btn-perfil:hover {
+  background: #c16990;
+  transform: translateY(-2px);
+}
+
+.error-pedido {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.error-pedido button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #d57ea4;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.error-pedido button:hover {
+  background: #c16990;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .confirmacion-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .acciones-finales {
+    flex-direction: column;
+  }
+
+  .btn-inicio,
+  .btn-perfil {
+    width: 100%;
+  }
 }

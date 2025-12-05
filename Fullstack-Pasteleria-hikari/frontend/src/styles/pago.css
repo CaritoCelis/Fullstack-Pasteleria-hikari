@@ -1,0 +1,150 @@
+/* Añadir al final de src/styles/pago.css */
+
+/* Contenedor general */
+.pago-container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 40px;
+  background: #fff6fa;
+  border-radius: 22px;
+  box-shadow: 0 4px 12px rgba(255, 150, 170, 0.25);
+  font-family: "Poppins", sans-serif;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sección cancelado */
+.pago-cancelado {
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.cancel-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-5px); }
+}
+
+.pago-cancelado h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #cf5d8c;
+  margin-bottom: 15px;
+}
+
+.pago-cancelado p {
+  color: #7f4963;
+  font-size: 16px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* Info sandbox */
+.info-sandbox {
+  background: #fbe1eb;
+  border-left: 4px solid #d57ea4;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin: 25px auto;
+  max-width: 450px;
+}
+
+.info-sandbox p {
+  color: #a1496e;
+  font-size: 14px;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+/* Acciones de pago */
+.pago-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pago-actions button {
+  padding: 14px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.btn-primary {
+  background: #d57ea4;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #c16990;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(213, 126, 164, 0.3);
+}
+
+.btn-secondary {
+  background: #e2a9c4;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #ce8eab;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(226, 169, 196, 0.3);
+}
+
+.btn-tertiary {
+  background: #ffd2de;
+  color: #a03f61;
+  border: 2px solid #f0a8b9;
+}
+
+.btn-tertiary:hover {
+  background: #f0a8b9;
+  border-color: #e891a8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 210, 222, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pago-container {
+    margin: 30px 15px;
+    padding: 30px 20px;
+  }
+
+  .pago-cancelado h2 {
+    font-size: 22px;
+  }
+
+  .cancel-icon {
+    font-size: 60px;
+  }
+
+  .pago-actions {
+    max-width: 100%;
+  }
+
+  .pago-actions button {
+    font-size: 15px;
+    padding: 12px 20px;
+  }
+}

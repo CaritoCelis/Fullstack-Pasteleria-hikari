@@ -14,6 +14,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/pedidos")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PedidoController {
 
     private final UsuarioRepository usuarioRepo;
@@ -27,38 +28,55 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestHeader("Authorization") String authHeader,
-                                    @RequestBody OrderRequest orderReq) {
+    public ResponseEntity<?> create(@RequestBody OrderRequest orderReq) {
+        
+        try {
+            // Obtener usuario autenticado desde el SecurityContext
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            
+            System.out.println("🛒 [PedidoController] Usuario autenticado: " + username);
+            System.out.println("🛒 [PedidoController] Items recibidos: " + orderReq.items.size());
+            
+            Usuario usuario = usuarioRepo.findByUsername(username)
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + username));
 
-        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return ResponseEntity.status(401).body("No autorizado");
+            // Convertir items del request en entidades OrderItem
+            List<OrderItem> items = new ArrayList<>();
+            
+            for (var itReq : orderReq.items) {
+                System.out.println("🔍 [PedidoController] Buscando producto ID: " + itReq.productId);
+                
+                Producto p = productoRepo.findById(itReq.productId)
+                        .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + itReq.productId));
+                
+                System.out.println("✅ [PedidoController] Producto encontrado: " + p.getName());
+                
+                OrderItem it = new OrderItem();
+                it.setProducto(p);
+                it.setQuantity(itReq.quantity);
+                it.setPrice(p.getPrice());
+                items.add(it);
+            }
+
+            // Crear pedido
+            Pedido pedido = pedidoService.createPedido(usuario, items);
+            
+            System.out.println("🎉 [PedidoController] Pedido creado exitosamente: " + pedido.getId());
+
+            return ResponseEntity.ok(
+                Map.of(
+                    "pedidoId", pedido.getId(),
+                    "total", pedido.getTotal(),
+                    "status", pedido.getStatus()
+                )
+            );
+            
+        } catch (RuntimeException e) {
+            System.err.println("❌ [PedidoController] Error: " + e.getMessage());
+            return ResponseEntity.badRequest().body(
+                Map.of("error", e.getMessage())
+            );
         }
-
-        // Obtener usuario autenticado desde el SecurityContext
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Usuario usuario = usuarioRepo.findByUsername(username).orElseThrow();
-
-        // Convertir items del request en entidades OrderItem
-        List<OrderItem> items = new ArrayList<>();
-        orderReq.items.forEach(itReq -> {
-            Producto p = productoRepo.findById(itReq.productId).orElseThrow();
-            OrderItem it = new OrderItem();
-            it.setProducto(p);
-            it.setQuantity(itReq.quantity);
-            it.setPrice(p.getPrice());
-            items.add(it);
-        });
-
-        // Crear pedido
-        Pedido pedido = pedidoService.createPedido(usuario, items);
-
-        return ResponseEntity.ok(
-            Map.of(
-                "pedidoId", pedido.getId(),
-                "total", pedido.getTotal(),
-                "status", pedido.getStatus()
-            )
-        );
     }
 
     @GetMapping

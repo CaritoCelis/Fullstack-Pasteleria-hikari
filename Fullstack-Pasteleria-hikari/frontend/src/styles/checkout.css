@@ -1,14 +1,12 @@
-/* ============================
-   CHECKOUT - SELECCIÓN DE PAGO
-   ============================ */
+/* src/styles/checkout.css */
 
 .checkout-container {
   max-width: 600px;
-  margin: 60px auto;
-  padding: 35px;
+  margin: 40px auto;
+  padding: 30px;
   background: #fff6fa;
   border-radius: 22px;
-  box-shadow: 0 6px 16px rgba(255, 150, 170, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 150, 170, 0.25);
   font-family: "Poppins", sans-serif;
 }
 
@@ -16,157 +14,73 @@
   text-align: center;
   font-weight: 700;
   color: #d06992;
-  margin-bottom: 35px;
-  font-size: 26px;
+  margin-bottom: 30px;
+  font-size: 1.8rem;
 }
 
-
-/* ============================
-   OPCIONES DE PAGO (RADIO BUTTONS)
-   ============================ */
-
-.checkout-container label {
+.metodo-pago-label {
   display: flex;
   align-items: center;
-  padding: 18px 20px;
-  margin-bottom: 16px;
+  padding: 18px;
+  margin-bottom: 15px;
   background: white;
-  border: 2px solid #ffd2de;
-  border-radius: 14px;
+  border: 2px solid #fbe1eb;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 16px;
-  font-weight: 500;
-  color: #7f4963;
-  position: relative;
 }
 
-.checkout-container label:hover {
-  background: #fef0f5;
-  border-color: #f3bdd1;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(255, 170, 190, 0.25);
+.metodo-pago-label:hover {
+  border-color: #e8b3c9;
+  box-shadow: 0 2px 8px rgba(255, 170, 190, 0.2);
 }
 
-.checkout-container label input[type="radio"] {
-  width: 22px;
-  height: 22px;
+.metodo-pago-label input[type="radio"] {
+  width: 20px;
+  height: 20px;
   margin-right: 15px;
-  accent-color: #d57ea4;
   cursor: pointer;
+  accent-color: #d57ea4;
 }
 
-/* Estado seleccionado */
-.checkout-container label:has(input[type="radio"]:checked) {
-  background: linear-gradient(135deg, #fef0f5 0%, #ffe8f2 100%);
-  border-color: #d57ea4;
-  box-shadow: 0 4px 12px rgba(213, 126, 164, 0.3);
+.metodo-pago-label input[type="radio"]:checked + .metodo-texto {
+  color: #d06992;
+  font-weight: 600;
 }
 
-.checkout-container label:has(input[type="radio"]:checked)::after {
-  content: "✓";
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #d57ea4;
-  font-weight: 700;
-  font-size: 22px;
+.metodo-texto {
+  font-size: 1.1rem;
+  color: #7f4963;
+  transition: color 0.2s;
 }
 
-
-/* ============================
-   BOTÓN CONTINUAR
-   ============================ */
-
-.checkout-container button {
+.btn-continuar {
   width: 100%;
-  padding: 16px;
-  margin-top: 25px;
-  font-size: 17px;
-  font-weight: 700;
+  padding: 15px;
+  margin-top: 20px;
+  background: #d57ea4;
+  color: white;
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #d57ea4 0%, #c16990 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(213, 126, 164, 0.4);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-.checkout-container button:hover {
-  background: linear-gradient(135deg, #c16990 0%, #a83863 100%);
+.btn-continuar:hover {
+  background: #c16990;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(193, 105, 144, 0.5);
+  box-shadow: 0 4px 12px rgba(213, 126, 164, 0.4);
 }
-
-.checkout-container button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(193, 105, 144, 0.4);
-}
-
-
-/* ============================
-   RESPONSIVE
-   ============================ */
 
 @media (max-width: 768px) {
   .checkout-container {
-    margin: 30px 15px;
-    padding: 25px;
+    margin: 20px;
+    padding: 20px;
   }
 
-  .checkout-container h2 {
-    font-size: 22px;
-    margin-bottom: 25px;
+  .metodo-texto {
+    font-size: 1rem;
   }
-
-  .checkout-container label {
-    padding: 15px 16px;
-    font-size: 14px;
-  }
-
-  .checkout-container button {
-    padding: 14px;
-    font-size: 15px;
-  }
-}
-
-
-/* ============================
-   ANIMACIÓN DE ENTRADA
-   ============================ */
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.checkout-container {
-  animation: slideIn 0.4s ease-out;
-}
-
-.checkout-container label {
-  animation: slideIn 0.5s ease-out backwards;
-}
-
-.checkout-container label:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.checkout-container label:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-.checkout-container button {
-  animation: slideIn 0.6s ease-out backwards;
-  animation-delay: 0.3s;
 }

@@ -1,5 +1,6 @@
 package com.hikari.pasteleria.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
@@ -11,9 +12,10 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Pedido pedido;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Producto producto;
 
@@ -21,7 +23,6 @@ public class OrderItem {
     private BigDecimal price;
 
     public OrderItem() {}
-    // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public Pedido getPedido() { return pedido; }

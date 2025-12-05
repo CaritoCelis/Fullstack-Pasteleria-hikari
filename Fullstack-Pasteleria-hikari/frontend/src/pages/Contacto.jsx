@@ -1,76 +1,49 @@
-// src/pages/Contacto.jsx
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
+import axios from "axios";
 import "../styles/contacto.css";
 import "../styles/styles.css";
 
-// Estas claves buscan cualquier usuario guardado en tu Login/Registro
-const USUARIO_KEYS = ["usuario", "usuarioActivo", "usuarioActual", "usuarioNombre"];
-
-function findUsuario() {
-    for (let key of USUARIO_KEYS) {
-        const raw = localStorage.getItem(key);
-        if (!raw) continue;
-
-        try {
-            const obj = JSON.parse(raw);
-            if (obj && (obj.nombre || obj.email)) {
-                return { key, val: obj };
-            }
-        } catch {
-            return { key, val: raw };
-        }
-    }
-    return null;
-}
-
 export default function Contacto() {
-    const [form, setForm] = useState({ nombre: "", email: "", mensaje: "" });
-    const [usuario, setUsuario] = useState(findUsuario());
-
-    useEffect(() => {
-        const handleStorage = () => setUsuario(findUsuario());
-        window.addEventListener("storage", handleStorage);
-        return () => window.removeEventListener("storage", handleStorage);
-    }, []);
+    const [form, setForm] = useState({ nombre: "", email: "", asunto: "", mensaje: "" });
+    const [loading, setLoading] = useState(false);
+    const [alert, setAlert] = useState(null);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.id]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setAlert(null);
 
-        const { nombre, email, mensaje } = form;
-
-        if (!nombre || !email || !mensaje) {
-            alert("Por favor, completa todos los campos.");
-            return;
-        }
-
-        const nuevoMensaje = {
-            nombre,
-            email,
-            mensaje,
-            fecha: new Date().toLocaleString()
-        };
-
-        const mensajes = JSON.parse(localStorage.getItem("mensajesContacto")) || [];
-        mensajes.push(nuevoMensaje);
-        localStorage.setItem("mensajesContacto", JSON.stringify(mensajes));
-
-        alert(`¡Gracias por contactarnos, ${nombre}! 🍰 Pronto responderemos tu mensaje.`);
-
-        setForm({ nombre: "", email: "", mensaje: "" });
+        try {
+        const response = await axios.post("http://localhost:8081/api/contacto", form);
+    
+    // La respuesta ya viene en response.data
+        setAlert({ tipo: "success", mensaje: "✅ " + response.data.message });
+        setForm({ nombre: "", email: "", asunto: "", mensaje: "" });
+    
+        } catch (error) {
+        const mensaje = error.response?.data?.message || "Error al enviar el mensaje";
+        setAlert({ tipo: "error", mensaje: "❌ " + mensaje });
+        } finally {
+        setLoading(false);
+    }
     };
 
     return (
         <main className="contacto-container">
             <h1>Contáctanos</h1>
-
             <p className="intro">
                 ¿Tienes dudas, pedidos especiales o comentarios? Escríbenos y te responderemos lo antes posible.
             </p>
+
+            {alert && (
+                <div className={`alert ${alert.tipo}`}>
+                    {alert.mensaje}
+                </div>
+            )}
 
             <form id="form-contacto" onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -93,6 +66,18 @@ export default function Contacto() {
                         onChange={handleChange}
                         required
                     />
+                    <small>Debe estar registrado en el sistema</small>
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="asunto">Asunto:</label>
+                    <input
+                        type="text"
+                        id="asunto"
+                        value={form.asunto}
+                        onChange={handleChange}
+                        required
+                    />
                 </div>
 
                 <div className="form-group">
@@ -106,7 +91,9 @@ export default function Contacto() {
                     ></textarea>
                 </div>
 
-                <button type="submit">Enviar</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Enviando..." : "Enviar"}
+                </button>
             </form>
         </main>
     );

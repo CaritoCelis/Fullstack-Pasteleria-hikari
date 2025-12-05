@@ -1,0 +1,129 @@
+/* src/styles/AdminLayout.css */
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #fff6fa;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== SIDEBAR ===== */
+.admin-sidebar {
+  width: 250px;
+  background: linear-gradient(135deg, #f3bdd1 0%, #d57ea4 100%);
+  color: white;
+  padding: 2rem 0;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  box-shadow: 4px 0 12px rgba(255, 150, 170, 0.25);
+}
+
+.admin-sidebar-header {
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.admin-user {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* ===== NAVEGACIÓN ===== */
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
+
+.admin-nav-item {
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  display: block;
+  font-weight: 600;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+}
+
+.admin-nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.admin-nav-item.nav-tienda {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-top: 1rem;
+}
+
+.btn-logout-admin {
+  background: rgba(207, 93, 140, 0.3);
+  border: 1px solid rgba(207, 93, 140, 0.5);
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.btn-logout-admin:hover {
+  background: rgba(207, 93, 140, 0.5);
+}
+
+.admin-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 1rem 0;
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+.admin-main {
+  margin-left: 250px;
+  flex: 1;
+  padding: 2rem;
+  width: calc(100% - 250px);
+  min-height: 100vh;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 968px) {
+  .admin-sidebar {
+    width: 200px;
+  }
+
+  .admin-main {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+
+  .admin-main {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+}

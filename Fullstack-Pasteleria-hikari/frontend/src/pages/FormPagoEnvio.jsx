@@ -8,10 +8,10 @@ export default function FormPagoEnvio() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const metodo = state?.metodo;
-  const { carrito, totalPrecio } = useContext(CarritoContext); // ✅ Cambio: totalCarrito → totalPrecio
+  const { carrito, totalPrecio } = useContext(CarritoContext);
 
-  const costoEnvio = metodo === "tarjeta" ? 3000 : 0;
-  const totalFinal = totalPrecio + costoEnvio; // ✅ Ahora usa totalPrecio
+  const costoEnvio = metodo === "paypal" ? 3000 : 0;
+  const totalFinal = totalPrecio + costoEnvio;
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -21,31 +21,19 @@ export default function FormPagoEnvio() {
     region: "",
     comuna: "",
     direccion: "",
-    tarjeta: "",
-    vencimiento: "",
-    cvv: "",
   });
 
-  // Validaciones básicas
   const validarFormulario = () => {
     if (!formData.nombre || !formData.apellido || !formData.email) {
       alert("Por favor completa los datos obligatorios.");
       return false;
     }
 
-    if (metodo === "tarjeta") {
-      const tarjetaValida = /^[0-9]{16}$/.test(formData.tarjeta);
-      const cvvValido = /^[0-9]{3,4}$/.test(formData.cvv);
-
-      if (!tarjetaValida) {
-        alert("Número de tarjeta inválido. Debe tener 16 dígitos.");
-        return false;
-      }
-      if (!cvvValido) {
-        alert("CVV inválido.");
-        return false;
-      }
+    if (metodo === "paypal" && !formData.direccion) {
+      alert("Por favor completa la dirección de envío.");
+      return false;
     }
+
     return true;
   };
 
@@ -72,21 +60,16 @@ export default function FormPagoEnvio() {
 
   return (
     <div className="form-container">
-      {metodo === "tarjeta" ? (
+      {metodo === "paypal" ? (
         <>
-          <h3>💳 Datos de la Tarjeta</h3>
-          <input name="tarjeta" placeholder="Número de tarjeta (16 dígitos)" maxLength={16} onChange={handleChange} />
-          <input name="vencimiento" placeholder="MM/AA" onChange={handleChange} />
-          <input name="cvv" placeholder="CVV" maxLength={4} onChange={handleChange} />
-
-          <h3>📦 Datos de envío</h3>
-          <input name="nombre" placeholder="Nombre" onChange={handleChange} />
-          <input name="apellido" placeholder="Apellido" onChange={handleChange} />
-          <input name="email" placeholder="Email" type="email" onChange={handleChange} />
+          <h3>📦 Datos de envío para PayPal</h3>
+          <input name="nombre" placeholder="Nombre" onChange={handleChange} required />
+          <input name="apellido" placeholder="Apellido" onChange={handleChange} required />
+          <input name="email" placeholder="Email" type="email" onChange={handleChange} required />
           <input name="telefono" placeholder="Teléfono" onChange={handleChange} />
           <input name="region" placeholder="Región" onChange={handleChange} />
           <input name="comuna" placeholder="Comuna" onChange={handleChange} />
-          <input name="direccion" placeholder="Dirección" onChange={handleChange} />
+          <input name="direccion" placeholder="Dirección completa" onChange={handleChange} required />
         </>
       ) : (
         <>
@@ -94,15 +77,17 @@ export default function FormPagoEnvio() {
           <p><strong>Dirección:</strong> Av. Central 123, Santiago</p>
           <p><strong>Horario:</strong> Lunes a Viernes 10:00 - 18:00</p>
 
-          <input name="nombre" placeholder="Nombre" onChange={handleChange} />
-          <input name="apellido" placeholder="Apellido" onChange={handleChange} />
-          <input name="email" type="email" placeholder="Email" onChange={handleChange} />
+          <input name="nombre" placeholder="Nombre" onChange={handleChange} required />
+          <input name="apellido" placeholder="Apellido" onChange={handleChange} required />
+          <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
           <input name="telefono" placeholder="Teléfono" onChange={handleChange} />
         </>
       )}
 
-      <h3>💰 Total a pagar: ${totalFinal.toLocaleString("es-CL")} CLP</h3>
-      <button onClick={handleConfirmar}>Confirmar Pedido</button>
+      <h3 className="total-pagar">💰 Total a pagar: ${totalFinal.toLocaleString("es-CL")} CLP</h3>
+      <button className="btn-confirmar" onClick={handleConfirmar}>
+        {metodo === "paypal" ? "Ir a PayPal (Simulado)" : "Confirmar Pedido"}
+      </button>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 // src/context/AuthContext.jsx
 import React, { createContext, useState, useEffect } from "react";
+import api from "../api/api";
 
 export const AuthContext = createContext();
 
@@ -7,7 +8,6 @@ export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Al montar el componente, recuperar sesión del localStorage
   useEffect(() => {
     const recuperarSesion = async () => {
       try {
@@ -18,7 +18,6 @@ export function AuthProvider({ children }) {
           return;
         }
 
-        // ✅ Verificar si el token está expirado
         if (isTokenExpired(token)) {
           console.log("Token expirado, limpiando sesión");
           logout();
@@ -26,26 +25,18 @@ export function AuthProvider({ children }) {
           return;
         }
 
-        // ✅ NUEVO: Obtener datos actualizados del usuario desde el backend
         try {
-          const response = await fetch("http://localhost:8080/api/auth/me", {
-            headers: {
-              "Authorization": `Bearer ${token}`,
-              "Content-Type": "application/json"
-            }
-          });
-
-          if (response.ok) {
-            const datosUsuario = await response.json();
+          const response = await api.get("/usuarios/me");
+          
+          if (response.data) {
+            const datosUsuario = response.data;
             setUsuario({ ...datosUsuario, token });
             localStorage.setItem("usuario", JSON.stringify({ ...datosUsuario, token }));
           } else {
-            // Si el token no es válido, cerrar sesión
             logout();
           }
         } catch (error) {
           console.error("Error al validar sesión:", error);
-          // Mantener la sesión local si hay error de red
           const usuarioGuardado = localStorage.getItem("usuario");
           if (usuarioGuardado) {
             setUsuario(JSON.parse(usuarioGuardado));
@@ -62,30 +53,25 @@ export function AuthProvider({ children }) {
     recuperarSesion();
   }, []);
 
-  // 🔹 Función para verificar si el token está expirado
   const isTokenExpired = (token) => {
     try {
-      // JWT tiene 3 partes: header.payload.signature
       const payload = JSON.parse(atob(token.split('.')[1]));
-      const exp = payload.exp * 1000; // Convertir a milisegundos
+      const exp = payload.exp * 1000;
       return Date.now() >= exp;
     } catch (error) {
       console.error("Error verificando token:", error);
-      return true; // Si hay error, asumir que está expirado
+      return true;
     }
   };
 
-  // 🔹 Login: guardar usuario y token
   const login = (datosUsuario) => {
     try {
-      // ✅ Asegurar que el usuario tenga todos los campos necesarios
       const usuarioCompleto = {
         id: datosUsuario.id,
         username: datosUsuario.username,
         email: datosUsuario.email,
         nombre: datosUsuario.nombre || "",
         apellido: datosUsuario.apellido || "",
-        fechaNacimiento: datosUsuario.fechaNacimiento || "",
         roles: datosUsuario.roles || [],
         token: datosUsuario.token
       };
@@ -94,13 +80,12 @@ export function AuthProvider({ children }) {
       localStorage.setItem("usuario", JSON.stringify(usuarioCompleto));
       localStorage.setItem("token", usuarioCompleto.token);
       
-      console.log("Sesión iniciada correctamente:", usuarioCompleto);
+      console.log("Sesión iniciada:", usuarioCompleto);
     } catch (error) {
       console.error("Error al guardar sesión:", error);
     }
   };
 
-  // 🔹 Logout: limpiar TODO
   const logout = () => {
     setUsuario(null);
     localStorage.removeItem("usuario");
@@ -108,22 +93,18 @@ export function AuthProvider({ children }) {
     console.log("Sesión cerrada");
   };
 
-  // 🔹 Verificar si el usuario tiene un rol específico
-  const hasRole = (role) => {
+  const isAdmin = () => {
     if (!usuario || !usuario.roles) return false;
-    return usuario.roles.includes(role);
+    return usuario.roles.some(role => 
+      role.nombre === "ROLE_ADMIN" || role === "ROLE_ADMIN"
+    );
   };
 
-  // 🔹 Obtener el token actual
-  const getToken = () => {
-    return localStorage.getItem("token");
-  };
-
-  // ✅ NUEVO: Actualizar datos del usuario (útil después de editar perfil)
-  const actualizarUsuario = (nuevosDatos) => {
-    const usuarioActualizado = { ...usuario, ...nuevosDatos };
-    setUsuario(usuarioActualizado);
-    localStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
+  const hasRole = (roleName) => {
+    if (!usuario || !usuario.roles) return false;
+    return usuario.roles.some(role => 
+      role.nombre === roleName || role === roleName
+    );
   };
 
   const value = {
@@ -131,13 +112,11 @@ export function AuthProvider({ children }) {
     login,
     logout,
     hasRole,
-    getToken,
-    actualizarUsuario,
+    isAdmin,
     loading,
     isAuthenticated: !!usuario
   };
 
-  // Mostrar loading mientras recupera la sesión
   if (loading) {
     return (
       <div style={{ 

@@ -29,20 +29,56 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String header = request.getHeader("Authorization");
+        
+        System.out.println("🔍 [JwtFilter] Header Authorization: " + header);
+        
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
-            if (jwtUtil.validateJwtToken(token)) {
-                String username = jwtUtil.getUsernameFromJwt(token);
-                Usuario u = usuarioRepository.findByUsername(username).orElse(null);
-                if (u != null) {
-                    var authorities = u.getRoles().stream()
-                            .map(r -> new SimpleGrantedAuthority(r.getName()))
-                            .collect(Collectors.toList());
-                    var auth = new UsernamePasswordAuthenticationToken(u.getUsername(), null, authorities);
-                    SecurityContextHolder.getContext().setAuthentication(auth);
+            
+            System.out.println("🔑 [JwtFilter] Token extraído");
+            
+            try {
+                if (jwtUtil.validateJwtToken(token)) {
+                    String username = jwtUtil.getUsernameFromJwt(token);
+                    
+                    System.out.println("✅ [JwtFilter] Token válido para usuario: " + username);
+                    
+                    Usuario u = usuarioRepository.findByUsername(username).orElse(null);
+                    
+                    if (u != null) {
+                        System.out.println("👤 [JwtFilter] Usuario encontrado: " + u.getUsername());
+                        System.out.println("🎭 [JwtFilter] Roles del usuario: " + u.getRoles());
+                        
+                        var authorities = u.getRoles().stream()
+                                .map(r -> {
+                                    String roleName = r.getName();
+                                    // Asegurarse de que el rol tenga el prefijo ROLE_
+                                    if (!roleName.startsWith("ROLE_")) {
+                                        roleName = "ROLE_" + roleName;
+                                    }
+                                    System.out.println("🔐 [JwtFilter] Authority agregada: " + roleName);
+                                    return new SimpleGrantedAuthority(roleName);
+                                })
+                                .collect(Collectors.toList());
+                        
+                        var auth = new UsernamePasswordAuthenticationToken(u.getUsername(), null, authorities);
+                        SecurityContextHolder.getContext().setAuthentication(auth);
+                        
+                        System.out.println("🎉 [JwtFilter] Autenticación establecida exitosamente");
+                    } else {
+                        System.out.println("❌ [JwtFilter] Usuario no encontrado en BD");
+                    }
+                } else {
+                    System.out.println("❌ [JwtFilter] Token inválido");
                 }
+            } catch (Exception e) {
+                System.out.println("💥 [JwtFilter] Excepción: " + e.getMessage());
+                e.printStackTrace();
             }
+        } else {
+            System.out.println("⚠️ [JwtFilter] No hay token Bearer en el header");
         }
+        
         filterChain.doFilter(request, response);
     }
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -78,39 +79,50 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest req) {
+    
+    System.out.println("🔍 Intentando login con: " + req.username());
+    
+    Optional<Usuario> uOpt;
 
-        Optional<Usuario> uOpt;
+    // Si el usuario escribió un email, lo buscamos como email
+    if (req.username().contains("@")) {
+        System.out.println("📧 Buscando por email");
+        uOpt = usuarioRepo.findByEmail(req.username());
+    } else {
+        System.out.println("👤 Buscando por username");
+        uOpt = usuarioRepo.findByUsername(req.username());
+    }
 
-        // Si el usuario escribió un email, lo buscamos como email
-        if (req.username().contains("@")) {
-            uOpt = usuarioRepo.findByEmail(req.username());
-        } else {
-            // Si escribió username, lo buscamos como username
-            uOpt = usuarioRepo.findByUsername(req.username());
-        }
+    if (uOpt.isEmpty()) {
+        System.out.println("❌ Usuario no encontrado");
+        return ResponseEntity.status(404).body(Map.of("error", "user not found"));
+    }
 
-        if (uOpt.isEmpty()) {
-            return ResponseEntity.status(404).body(Map.of("error", "user not found"));
-        }
+    Usuario u = uOpt.get();
+    System.out.println("✅ Usuario encontrado: " + u.getUsername());
+    System.out.println("🔐 Password en BD: " + u.getPassword().substring(0, 20) + "...");
+    System.out.println("🔑 Password ingresado: " + req.password());
+    
+    boolean matches = passwordEncoder.matches(req.password(), u.getPassword());
+    System.out.println("🔍 ¿Passwords coinciden? " + matches);
 
-        Usuario u = uOpt.get();
+    if (!matches) {
+        System.out.println("❌ Contraseña incorrecta");
+        return ResponseEntity.status(401).body(Map.of("error", "invalid credentials"));
+    }
 
-        if (!passwordEncoder.matches(req.password(), u.getPassword())) {
-            return ResponseEntity.status(401).body(Map.of("error", "invalid credentials"));
-        }
-
-        String token = jwtUtil.generateToken(u.getUsername());
-        
-        // ✅ NUEVO: Devolver más información del usuario al hacer login
-        Map<String, Object> response = new HashMap<>();
-        response.put("token", token);
-        response.put("username", u.getUsername());
-        response.put("email", u.getEmail());
-        response.put("nombre", u.getNombre());
-        response.put("apellido", u.getApellido());
-        response.put("fechaNacimiento", u.getFechaNacimiento() != null ? u.getFechaNacimiento().toString() : null);
-        
-        return ResponseEntity.ok(response);
+    System.out.println("🎉 Login exitoso!");
+    String token = jwtUtil.generateToken(u.getUsername());
+    
+    Map<String, Object> response = new HashMap<>();
+    response.put("token", token);
+    response.put("username", u.getUsername());
+    response.put("email", u.getEmail());
+    response.put("nombre", u.getNombre());
+    response.put("apellido", u.getApellido());
+    response.put("fechaNacimiento", u.getFechaNacimiento() != null ? u.getFechaNacimiento().toString() : null);
+    
+    return ResponseEntity.ok(response);
     }
 
     @GetMapping("/me")
